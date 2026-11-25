@@ -2,7 +2,7 @@
 
 Living status file. Update it after every phase. A fresh or cleared Claude Code session should read this file first, then `CLAUDE.md`.
 
-_Last updated: 2026-11-24 ~21:47 PST, after the AC1 cycle (before the first `/compact`)._
+_Last updated: 2026-11-24 ~22:10 PST, after AC2 + AC3 cycles and the UI check, right before the planned `/clear`._
 
 ## Status
 
@@ -13,27 +13,41 @@ _Last updated: 2026-11-24 ~21:47 PST, after the AC1 cycle (before the first `/co
 | Part 2: Explore (Glob/Grep/Read) in Plan mode | Done | `docs/hw4/IMPLEMENTATION-PLAN.md` |
 | Part 2: Plan approved, saved | Done | `694a616` |
 | Part 3: AC1 RED / GREEN / REFACTOR | Done | `7b3c942`, (`1bf9f7c` harness fix), `f3352b8`, `9b8e9fe`; `evidence/02-ac1-keyword-search.md` |
-| Part 3: AC2 RED / GREEN / REFACTOR | **Next** | |
-| Part 3: AC3 RED / GREEN / REFACTOR | Not started | |
-| Context mgmt: `/compact` | Requested after AC1 | user types it |
-| Context mgmt: `/clear`, `--continue`, `/export` | Not started | user types these |
-| Part 4: session log, reflection | Not started | |
-| Final verification, README, checklist, push | Not started | push needs user approval |
+| Part 3: AC2 RED / GREEN / REFACTOR | Done | `4c3716d`, `05ac412`, `786fd7e`; `evidence/03-ac2-result-count-empty-state.md` |
+| Part 3: AC3 RED / GREEN / REFACTOR | Done | `63d6d9a`, `e90434b`, `fc0ae3d` (+ `7bb4d74` copy); `evidence/04-ac3-category-filter.md` |
+| Manual UI check | Done | `evidence/05-ui-check.md`, `evidence/ui/*.jpg` |
+| Context mgmt: `/compact` | Done (user typed it) | see "Context management log"; `evidence/compact-transcript-evidence.txt` |
+| Context mgmt: `/clear` | **Next — user types it** | |
+| Context mgmt: `claude --continue` | Pending — user runs in a terminal | |
+| Context mgmt: `/export` | Pending — user types it (optional) | |
+| Part 4: annotated session log, reflection | Not started | |
+| README, submission checklist, final verification | Not started | |
+| Push `hw4/idea-explorer-tdd` | Not started | needs user approval |
+| Teammate participation | **Missing** | assignment is for pairs; no teammate evidence exists |
 
 ## Accepted decisions
 
 - Repo root is `E:\idea-inbox-p3-starter\idea-inbox-p3-starter` (the outer folder of the same name is not the repo).
-- Branch `hw4/idea-explorer-tdd`; remote `origin` = `https://github.com/Dyllike3/idea-inbox-p3-starter.git` (created by the user via GitHub Desktop; name is `idea-inbox-p3-starter`, not `idea-inbox-p3`). Only the baseline `c18b176` is pushed. Never force-push; ask before pushing.
+- Branch `hw4/idea-explorer-tdd`; remote `origin` = `https://github.com/Dyllike3/idea-inbox-p3-starter.git` (created by the user via GitHub Desktop). Only the baseline `c18b176` is pushed. Never force-push; ask before pushing.
 - Use `npm.cmd` in PowerShell. Claude Code 2.1.330 binary: `C:\Users\xiaow\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\claude-code\2.1.330\9424831ad51c\claude.exe` (not on PATH).
 - No new dependencies; tests use RTL `fireEvent.change`.
-- State lives in `App`; visible list is derived via `filterIdeas(ideas, criteria)` in `src/utils/filterIdeas.ts`.
-- Accessible names: search = searchbox "Search ideas" (`#idea-search`); category = combobox "Category" (`#idea-category`, AC3); count = `role="status"` (AC2).
-- Empty state is a `<p>` (not `<li>`), text `No matching ideas.`, rendered instead of the `<ul>`.
-- `src/test/setup.ts` now calls RTL `cleanup()` after each test (latent starter bug found during AC1 GREEN).
+- State lives in `App` (`query`, `category`); visible list is derived via `filterIdeas(ideas, { query, category })` in `src/utils/filterIdeas.ts`; `CATEGORY_FILTERS` + `isCategoryFilter` there too. Count text via `src/utils/formatIdeaCount.ts`.
+- Accessible names: searchbox "Search ideas" (`#idea-search`); combobox "Category" (`#idea-category`); count `role="status"`.
+- Empty state is `<p className="empty-state">No matching ideas.</p>`, rendered instead of the `<ul>`.
+- `src/test/setup.ts` calls RTL `cleanup()` after each test (latent starter bug found during AC1 GREEN).
+- Dev server for UI checks: start `npm.cmd run dev -- --port 5173 --strictPort` from Bash in the background, then open http://localhost:5173 in the browser pane (the pane's `launch.json` lookup points at the outer folder, so it was not used).
 
 ## Commits so far
 
 ```text
+7bb4d74 chore: update hero copy now that search and filtering exist
+fc0ae3d refactor: move category criterion into filterIdeas and group filter controls (AC3)
+e90434b feat: GREEN add category filter combined with keyword search (AC3)
+63d6d9a test: RED add category filter tests (AC3)
+786fd7e refactor: extract result count formatting and style empty state (AC2)
+05ac412 feat: GREEN show filtered result count and empty state (AC2)
+4c3716d test: RED add result count and empty state tests (AC2)
+9f6d20d docs: record AC1 TDD evidence and update workflow state
 9b8e9fe refactor: extract idea filtering logic (AC1)
 f3352b8 feat: GREEN implement keyword search (AC1)
 1bf9f7c test: unmount rendered trees after each test
@@ -46,17 +60,42 @@ f3352b8 feat: GREEN implement keyword search (AC1)
 c18b176 chore: bootstrap P3 starter
 ```
 
-## Next steps
+(Plus the docs commit that adds this version of the file.)
 
-1. **AC2 RED**: in `src/App.test.tsx` add `describe('AC2 — result count and empty state')`: initial count `4 ideas` (role status); `quiz` → `1 idea`; `plan` → `2 ideas`; `xyz-no-match` → `No matching ideas.`, `0 ideas`, no listitems. Run, save `docs/hw4/evidence/ac2-red.txt`, commit `test: RED ...`.
-2. **AC2 GREEN**: count from `visibleIdeas.length` with singular/plural + `role="status"`; conditional empty state. Save `ac2-green.txt`, commit `feat: GREEN ...`.
-3. **AC2 REFACTOR** (e.g. `formatIdeaCount`) or document why none.
-4. AC3 per `docs/hw4/IMPLEMENTATION-PLAN.md`.
-5. Evidence summary per cycle (`docs/hw4/evidence/0N-*.md`), then session log, reflection, README, checklist, final verification, push (ask first).
+## Test counts per phase (from saved outputs)
+
+| Phase | Result |
+| --- | --- |
+| Baseline | 1/1 pass |
+| AC1 RED | 6 failed, 1 passed |
+| AC1 GREEN / REFACTOR | 7/7 |
+| AC2 RED | 5 failed, 7 passed |
+| AC2 GREEN / REFACTOR | 12/12 |
+| AC3 RED | 5 failed, 12 passed |
+| AC3 GREEN / REFACTOR | 17/17 |
+
+## Next steps (after `/clear`)
+
+1. Write `docs/hw4/ANNOTATED-SESSION-LOG.md` from this file, `docs/hw4/evidence/*`, `git log`, and the transcript JSONL (fields only, no invented excerpts).
+2. Write `docs/hw4/REFLECTION.md` (500–650 words, first person, mark passages about the student's previous habits for their review), and a PDF only if it can be produced reliably without new project dependencies.
+3. Write `docs/hw4/SUBMISSION-CHECKLIST.md` (rubric audit: Part 1 12.5, Part 2 15, Part 3 15, Part 4 7.5; teammate section flagged as missing).
+4. Update `README.md` (feature, commands, HW4 docs links).
+5. Final verification: `npm.cmd test`, `run typecheck`, `run lint`, `run build`, `git log`; save to `docs/hw4/evidence/06-final-verification.txt`.
+6. Ask the user before `git push -u origin hw4/idea-explorer-tdd` (never force), then verify with `git ls-remote`.
+
+## Context management log
+
+| When (PST) | Command | Who ran it | Why | What was kept |
+| --- | --- | --- | --- | --- |
+| 2026-11-24 22:03–22:04 | `/compact` | user typed it (transcript: `<command-name>/compact</command-name>`, then `compact_boundary` at 06:04:32Z UTC, `trigger: manual`, `preTokens: 153831`, 71.4 s) | After the AC1 cycle the context held ~154k tokens, mostly long Vitest outputs, schema JSON and plan text that were already saved to files. A natural boundary before AC2. | Claude Code's summary (primary request and constraints, file states, errors and fixes, pending tasks, git log, next step) plus the most recent messages verbatim. Everything else was recoverable from the repo: this file, `CLAUDE.md`, the plan, and `evidence/`. After compaction Claude re-read this file, `02-ac1-*.md`, `App.tsx`, `filterIdeas.ts`, `setup.ts`, and continued AC2 RED without asking the user for context. |
+| (pending) | `/clear` | user | Boundary between implementation (Part 3) and writing (Part 4): the coding context is no longer needed. | Only files: this file, `CLAUDE.md` (auto-loaded) and `docs/hw4/evidence/`. |
+| (pending) | `claude --continue` | user, in a terminal | Show resuming the most recent conversation from the CLI. | The previous conversation in this folder. |
+
+An earlier attempt: at ~22:02 the user replied "Compact is done" from a button before `/compact` had actually been sent; Claude checked the transcript, found no compaction record, and asked the user to type it. The real compaction followed.
 
 ## Session event log (for ANNOTATED-SESSION-LOG.md)
 
-All in one Desktop Code-tab session on 2026-11-24 unless noted.
+All in one Desktop Code-tab session on 2026-11-24 (PST) unless noted.
 
 1. Audit: Bash/PowerShell `ls`, `git status/log/branch`, baseline `npm.cmd test/typecheck/lint/build` (all pass, 1 test).
 2. GitHub: no remote, no `gh`; user chose GitHub Desktop and published the repo.
@@ -65,17 +104,21 @@ All in one Desktop Code-tab session on 2026-11-24 unless noted.
 5. Downloaded settings JSON schema, wrote `.claude/settings.json`, validated rules with Node (0 failures). `7a4bc3b`.
 6. `EnterPlanMode` tool → Glob `src/**/*.{ts,tsx,css}`, Glob `**/*.test.{ts,tsx}`, Grep `useState|useMemo|filter\(|search|category`, Grep `user-event|fireEvent|getByRole|getByLabelText`, Read App.tsx / App.test.tsx / IdeaCard.tsx / ideas.ts / styles.css → plan file → `ExitPlanMode`, user approved. `694a616`.
 7. AC1 RED → GREEN attempt failed (cleanup bug) → harness fix → GREEN → REFACTOR (see evidence/02).
+8. "Compact is done" button without a real `/compact` → Claude verified the transcript and asked again → user typed `/compact` (22:04).
+9. After compaction: re-read state files, AC2 RED (5 fail: no `role="status"` / no empty text) → GREEN → REFACTOR (`formatIdeaCount`, `.empty-state` CSS).
+10. AC3 RED (5 fail: no "Category" combobox) → GREEN (inline filter + `as` cast) → REFACTOR (category in `filterIdeas`, type guard, `.filters` CSS) → separate `chore:` hero copy commit.
+11. Browser-pane `preview_start` with a name failed (looked for `launch.json` in the outer folder); Claude deleted the in-repo `launch.json` it had just created, started Vite from Bash and opened the URL instead. UI check of all ACs + mobile layout (evidence/05).
 
 ## Useful commands
 
 ```powershell
 npm.cmd test
 npm.cmd test -- --reporter=verbose
-npm.cmd test -- -t "AC2"
+npm.cmd test -- -t "AC3"
 npm.cmd run typecheck
 npm.cmd run lint
 npm.cmd run build
-git log --oneline --decorate -20
+git log --oneline --decorate -25
 ```
 
 ## How to resume

@@ -1,0 +1,31 @@
+# /compact evidence extracted from the Claude Code session transcript
+# source: ~/.claude/projects/E--idea-inbox-p3-starter/b411dd84-2136-4693-bd2d-e7a60a7ebd97.jsonl
+# extracted: 2026-11-25T06:04:48Z by grep (fields only; no conversation text)
+
+## user-typed slash-command entries (line:tag)
+163:<command-name>/init</command-name>
+167:<command-name>/init</command-name>
+659:<command-name>/compact</command-name>
+660:<command-name>/compact</command-name>
+666:<command-name>/compact</command-name>
+677:<command-name>/init</command-name>
+698:<command-name>/init</command-name>
+700:<command-name>/compact</command-name>
+732:<command-name>/init</command-name>
+736:<command-name>/compact</command-name>
+751:<command-name>/compact</command-name>
+751:<command-name>/init</command-name>
+761:<command-name>/compact</command-name>
+761:<command-name>/init</command-name>
+
+## compact_boundary entry
+"subtype":"compact_boundary","content":"Conversation compacted","isMeta":false,"timestamp":"2026-11-25T06:04:32.748Z"
+"compactMetadata":{"trigger":"manual","preTokens":153831
+"durationMs":71382,"preCompactDiscoveredTools":["EnterPlanMode","ExitPlanMode"]
+
+## interpretation
+- Lines 163/167 are the user-typed /init (2026-11-25T05:39Z UTC).
+- Lines 659-666 are the user-typed /compact entries; line 696 is the compact_boundary
+  the harness wrote (manual trigger, 153,831 tokens before compaction, 71.4 s).
+- Lines 677 and later match only because Claude's own grep commands (recorded as tool
+  calls in the transcript) contain the search strings; they are not slash commands.
