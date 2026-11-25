@@ -1,0 +1,48 @@
+# AC3 REFACTOR run — 2026-11-25T06:06:47Z — HEAD e90434b + uncommitted refactor (category criterion in filterIdeas, CATEGORY_FILTERS + type guard, .filters CSS)
+$ npm.cmd test -- --reporter=verbose
+
+> idea-inbox-p3@0.1.0 test
+> vitest run --reporter=verbose
+
+
+ RUN  v4.1.12 E:/idea-inbox-p3-starter/idea-inbox-p3-starter
+
+ ✓ src/App.test.tsx > Idea Inbox starter > shows the application heading and four starter ideas 90ms
+ ✓ src/App.test.tsx > AC1 — keyword search > renders a labeled search input that starts empty 8ms
+ ✓ src/App.test.tsx > AC1 — keyword search > keeps only ideas whose title matches as the user types 13ms
+ ✓ src/App.test.tsx > AC1 — keyword search > matches idea notes case-insensitively 18ms
+ ✓ src/App.test.tsx > AC1 — keyword search > returns every idea whose title or notes contain the keyword 11ms
+ ✓ src/App.test.tsx > AC1 — keyword search > ignores leading and trailing whitespace in the query 9ms
+ ✓ src/App.test.tsx > AC1 — keyword search > shows all ideas again when the query is cleared or only whitespace 22ms
+ ✓ src/App.test.tsx > AC2 — result count and empty state > shows the total count of visible ideas initially 4ms
+ ✓ src/App.test.tsx > AC2 — result count and empty state > uses the singular form when exactly one idea matches 9ms
+ ✓ src/App.test.tsx > AC2 — result count and empty state > updates the count to the number of filtered ideas 8ms
+ ✓ src/App.test.tsx > AC2 — result count and empty state > shows an empty state and zero count when nothing matches 8ms
+ ✓ src/App.test.tsx > AC2 — result count and empty state > hides the empty state again when the query matches ideas 13ms
+ ✓ src/App.test.tsx > AC3 — category filter > renders an accessible category dropdown that defaults to All 9ms
+ ✓ src/App.test.tsx > AC3 — category filter > shows only ideas in the chosen category 19ms
+ ✓ src/App.test.tsx > AC3 — category filter > combines the category with the keyword using AND 12ms
+ ✓ src/App.test.tsx > AC3 — category filter > removes only the category restriction when All is selected again 19ms
+ ✓ src/App.test.tsx > AC3 — category filter > shows the empty state when category and keyword have no overlap 13ms
+
+ Test Files  1 passed (1)
+      Tests  17 passed (17)
+   Start at  22:06:47
+   Duration  915ms (transform 59ms, setup 113ms, import 51ms, tests 285ms, environment 349ms)
+
+# exit code: 0
+
+$ npm.cmd run typecheck
+
+> idea-inbox-p3@0.1.0 typecheck
+> tsc --noEmit
+
+# exit code: 0
+
+$ npm.cmd run lint
+
+> idea-inbox-p3@0.1.0 lint
+> eslint .
+
+# exit code: 0
+

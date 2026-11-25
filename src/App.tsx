@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { IdeaCard } from './components/IdeaCard'
-import { starterIdeas, type IdeaCategory } from './data/ideas'
-import { filterIdeas } from './utils/filterIdeas'
+import { starterIdeas } from './data/ideas'
+import {
+  CATEGORY_FILTERS,
+  filterIdeas,
+  isCategoryFilter,
+  type CategoryFilter,
+} from './utils/filterIdeas'
 import { formatIdeaCount } from './utils/formatIdeaCount'
 
 export default function App() {
   const [query, setQuery] = useState('')
-  const [category, setCategory] = useState<'All' | IdeaCategory>('All')
-  const visibleIdeas = filterIdeas(starterIdeas, { query }).filter(
-    (idea) => category === 'All' || idea.category === category,
-  )
+  const [category, setCategory] = useState<CategoryFilter>('All')
+  const visibleIdeas = filterIdeas(starterIdeas, { query, category })
 
   return (
     <div className="page-shell">
@@ -33,25 +36,34 @@ export default function App() {
           </span>
         </div>
 
-        <label htmlFor="idea-search">Search ideas</label>
-        <input
-          id="idea-search"
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
+        <div className="filters">
+          <div className="filters__field">
+            <label htmlFor="idea-search">Search ideas</label>
+            <input
+              id="idea-search"
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+          </div>
 
-        <label htmlFor="idea-category">Category</label>
-        <select
-          id="idea-category"
-          value={category}
-          onChange={(event) => setCategory(event.target.value as 'All' | IdeaCategory)}
-        >
-          <option value="All">All</option>
-          <option value="Study">Study</option>
-          <option value="Software">Software</option>
-          <option value="Personal">Personal</option>
-        </select>
+          <div className="filters__field">
+            <label htmlFor="idea-category">Category</label>
+            <select
+              id="idea-category"
+              value={category}
+              onChange={(event) => {
+                if (isCategoryFilter(event.target.value)) setCategory(event.target.value)
+              }}
+            >
+              {CATEGORY_FILTERS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
         {visibleIdeas.length === 0 ? (
           <p className="empty-state">No matching ideas.</p>
