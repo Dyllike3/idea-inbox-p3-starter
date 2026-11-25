@@ -1,0 +1,1 @@
+JSON parsed OK; allow=33 ask=18 deny=27 ; schema rule-pattern failures: 0
