@@ -24,7 +24,9 @@ export default function App() {
             <h2>Saved ideas</h2>
             <p className="muted">A small dataset for developing the Idea Explorer feature.</p>
           </div>
-          <span className="count">{starterIdeas.length} ideas</span>
+          <span className="count" role="status">
+            {visibleIdeas.length} {visibleIdeas.length === 1 ? 'idea' : 'ideas'}
+          </span>
         </div>
 
         <label htmlFor="idea-search">Search ideas</label>
@@ -35,11 +37,15 @@ export default function App() {
           onChange={(event) => setQuery(event.target.value)}
         />
 
-        <ul className="idea-grid">
-          {visibleIdeas.map((idea) => (
-            <IdeaCard key={idea.id} idea={idea} />
-          ))}
-        </ul>
+        {visibleIdeas.length === 0 ? (
+          <p className="empty-state">No matching ideas.</p>
+        ) : (
+          <ul className="idea-grid">
+            {visibleIdeas.map((idea) => (
+              <IdeaCard key={idea.id} idea={idea} />
+            ))}
+          </ul>
+        )}
       </main>
 
       <footer className="footer">Built as a clean starting point for the Claude Code HW4 workflow.</footer>
