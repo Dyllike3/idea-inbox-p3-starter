@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { IdeaCard } from './components/IdeaCard'
 import { starterIdeas } from './data/ideas'
 import { filterIdeas } from './utils/filterIdeas'
+import { formatIdeaCount } from './utils/formatIdeaCount'
 
 export default function App() {
   const [query, setQuery] = useState('')
@@ -25,7 +26,7 @@ export default function App() {
             <p className="muted">A small dataset for developing the Idea Explorer feature.</p>
           </div>
           <span className="count" role="status">
-            {visibleIdeas.length} {visibleIdeas.length === 1 ? 'idea' : 'ideas'}
+            {formatIdeaCount(visibleIdeas.length)}
           </span>
         </div>
 
