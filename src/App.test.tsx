@@ -74,3 +74,52 @@ describe('AC1 — keyword search', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(4)
   })
 })
+
+describe('AC2 — result count and empty state', () => {
+  function resultCount() {
+    return screen.getByRole('status')
+  }
+
+  it('shows the total count of visible ideas initially', () => {
+    render(<App />)
+
+    expect(resultCount()).toHaveTextContent('4 ideas')
+  })
+
+  it('uses the singular form when exactly one idea matches', () => {
+    render(<App />)
+
+    search('quiz')
+
+    expect(resultCount()).toHaveTextContent('1 idea')
+    expect(resultCount()).not.toHaveTextContent('1 ideas')
+  })
+
+  it('updates the count to the number of filtered ideas', () => {
+    render(<App />)
+
+    search('plan')
+
+    expect(resultCount()).toHaveTextContent('2 ideas')
+  })
+
+  it('shows an empty state and zero count when nothing matches', () => {
+    render(<App />)
+
+    search('xyz-no-match')
+
+    expect(screen.getByText('No matching ideas.')).toBeInTheDocument()
+    expect(resultCount()).toHaveTextContent('0 ideas')
+    expect(screen.queryAllByRole('listitem')).toHaveLength(0)
+  })
+
+  it('hides the empty state again when the query matches ideas', () => {
+    render(<App />)
+
+    search('xyz-no-match')
+    search('')
+
+    expect(screen.queryByText('No matching ideas.')).not.toBeInTheDocument()
+    expect(resultCount()).toHaveTextContent('4 ideas')
+  })
+})
