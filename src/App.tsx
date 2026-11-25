@@ -1,7 +1,15 @@
+import { useState } from 'react'
 import { IdeaCard } from './components/IdeaCard'
 import { starterIdeas } from './data/ideas'
 
 export default function App() {
+  const [query, setQuery] = useState('')
+  const keyword = query.trim().toLowerCase()
+  const visibleIdeas = starterIdeas.filter(
+    (idea) =>
+      idea.title.toLowerCase().includes(keyword) || idea.notes.toLowerCase().includes(keyword),
+  )
+
   return (
     <div className="page-shell">
       <header className="hero">
@@ -22,8 +30,16 @@ export default function App() {
           <span className="count">{starterIdeas.length} ideas</span>
         </div>
 
+        <label htmlFor="idea-search">Search ideas</label>
+        <input
+          id="idea-search"
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+
         <ul className="idea-grid">
-          {starterIdeas.map((idea) => (
+          {visibleIdeas.map((idea) => (
             <IdeaCard key={idea.id} idea={idea} />
           ))}
         </ul>
