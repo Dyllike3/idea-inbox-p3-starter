@@ -96,4 +96,6 @@ The schema at `https://json.schemastore.org/claude-code-settings.json` was downl
 JSON parsed OK; allow=33 ask=18 deny=27 ; schema rule-pattern failures: 0
 ```
 
+**Later fix (session 2, 23:33):** the schema pattern accepted `Write(./.env)` and `Write(./.env.*)`, but the Claude Code CLI flagged them as invalid when the `--continue` demo was run, because file permission checks only match `Edit(path)` rules. Both were removed. The existing `Edit(./.env)` / `Edit(./.env.*)` deny rules already block Edit and Write on those files, so protection is unchanged. Now deny = 25. Schema validation alone did not catch this; the real CLI did.
+
 The user can view the active rules in the app's permission UI, or with `/permissions` in the CLI.

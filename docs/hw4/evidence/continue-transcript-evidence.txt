@@ -1,0 +1,32 @@
+# claude --continue evidence extracted from the Claude Code CLI transcript
+# source: ~/.claude/projects/E--idea-inbox-p3-starter-idea-inbox-p3-starter/875e0e15-3320-4e4e-8779-868828c02008.jsonl (57 lines)
+#         ~/.claude/sessions/84892.json (live-process record of the resumed CLI)
+# extracted: 2026-11-25T07:33:07Z by grep/node (selected fields only; account ids omitted)
+
+## user prompts and assistant replies (entrypoint, session, timestamp, text)
+line 6: user | entrypoint=cli | session=875e0e15-3320-4e4e-8779-868828c02008 | 2026-11-25T07:29:37.821Z | remember this phrase: HW4-CONTINUE-VERIFIED. Do not modify files.
+line 32: assistant | entrypoint=cli | session=875e0e15-3320-4e4e-8779-868828c02008 | 2026-11-25T07:29:42.240Z | I'll keep **HW4-CONTINUE-VERIFIED** in mind for the rest of this session. I haven't changed any files, and that includes my persistent memory, so the phrase won't carry over after `/clear` or into a new session.
+line 45: user | entrypoint=cli | session=875e0e15-3320-4e4e-8779-868828c02008 | 2026-11-25T07:30:54.818Z | without reading any files, what checkpoint phrase did I give you earlier in our conversation?
+line 56: assistant | entrypoint=cli | session=875e0e15-3320-4e4e-8779-868828c02008 | 2026-11-25T07:30:57.530Z | The checkpoint phrase you gave me was **HW4-CONTINUE-VERIFIED**. I recalled it from our conversation without reading any files.
+
+## tool calls in the whole transcript
+tool_use count: 0
+
+## first process: exit records (cost-state is written when the CLI exits)
+41:"type":"cost-state","sessionId":"875e0e15-3320-4e4e-8779-868828c02008"
+41:"totalDuration":366046
+41:"startTime":1795591435540
+43:"type":"cost-state","sessionId":"875e0e15-3320-4e4e-8779-868828c02008"
+43:"totalDuration":366054
+43:"startTime":1795591435540
+startTime 1795591435540 ms = 2026-11-24 23:23:55 PST; + totalDuration 366054 ms = exit at about 23:30:01 PST
+
+## second process (the --continue run)
+pid: 84892
+sessionId: 875e0e15-3320-4e4e-8779-868828c02008
+cwd: E:\idea-inbox-p3-starter\idea-inbox-p3-starter
+startedAt: 1795591814774
+version: 2.1.330
+kind: interactive
+entrypoint: cli
+startedAt as PST: 11/24/2026, 11:30:14 PM

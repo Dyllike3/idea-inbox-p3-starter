@@ -18,7 +18,7 @@ _Last updated: 2026-11-24 ~23:20 PST, in session 2 (after `/clear`), while writi
 | Manual UI check | Done | `evidence/05-ui-check.md`, `evidence/ui/*.jpg` |
 | Context mgmt: `/compact` | Done (user typed it) | see "Context management log"; `evidence/compact-transcript-evidence.txt` |
 | Context mgmt: `/clear` | Done (user typed it, 23:12:48) | `evidence/07-context-management.md`, `evidence/clear-transcript-evidence.txt` |
-| Context mgmt: `claude --continue` | **Pending — user runs in a terminal** (steps in `SUBMISSION-CHECKLIST.md`) | |
+| Context mgmt: `claude --continue` | Done (user, PowerShell CLI, 23:24–23:31) | `evidence/07-context-management.md` §3, `evidence/continue-transcript-evidence.txt` |
 | Context mgmt: `/export` | Not run (optional) | |
 | Part 4: annotated session log, reflection | Done (session 2) | `ANNOTATED-SESSION-LOG.md`, `REFLECTION.md` |
 | README, submission checklist, final verification | Done (session 2) | `README.md`, `SUBMISSION-CHECKLIST.md`, `evidence/06-final-verification.txt` |
@@ -79,7 +79,7 @@ c18b176 chore: bootstrap P3 starter
 Done in session 2 (after `/clear`): session log, reflection, checklist, README, final verification (`evidence/06-final-verification.txt`), context-management evidence (`evidence/07-*`, `clear-transcript-evidence.txt`), push of `hw4/idea-explorer-tdd`.
 
 Remaining (student):
-1. `claude --continue` demo from a terminal (exact commands in `SUBMISSION-CHECKLIST.md`), then record it in session log §5 and `evidence/07-context-management.md` §3 and push again.
+1. ~~`claude --continue` demo~~ done and recorded.
 2. Genuine teammate participation, or an explanation to the instructor.
 3. Review `REFLECTION.md`, then submit the branch URL on Canvas.
 
@@ -89,7 +89,7 @@ Remaining (student):
 | --- | --- | --- | --- | --- |
 | 2026-11-24 22:03–22:04 | `/compact` | user typed it (transcript: `<command-name>/compact</command-name>`, then `compact_boundary` at 06:04:32Z UTC, `trigger: manual`, `preTokens: 153831`, 71.4 s) | After the AC1 cycle the context held ~154k tokens, mostly long Vitest outputs, schema JSON and plan text that were already saved to files. A natural boundary before AC2. | Claude Code's summary (primary request and constraints, file states, errors and fixes, pending tasks, git log, next step) plus the most recent messages verbatim. Everything else was recoverable from the repo: this file, `CLAUDE.md`, the plan, and `evidence/`. After compaction Claude re-read this file, `02-ac1-*.md`, `App.tsx`, `filterIdeas.ts`, `setup.ts`, and continued AC2 RED without asking the user for context. |
 | 2026-11-24 23:12:48 | `/clear` | user typed it (new session `c7ea7f75` has `derived-from … via: clear` and `<command-name>/clear</command-name>`) | Boundary between implementation (Part 3) and writing (Part 4): the coding context is no longer needed. | Nothing from the conversation. Session 2 resumed from the auto-memory entry, git history, this file, the plan and `evidence/`. `CLAUDE.md` was not auto-loaded at first because the Code tab was opened on the parent folder (see `evidence/07-context-management.md`). |
-| (pending) | `claude --continue` | user, in a terminal | Show resuming the most recent conversation from the CLI. | The previous conversation in this folder. |
+| 2026-11-24 23:30:14 | `claude --continue` | user, PowerShell CLI in the repo folder | Show resuming the most recent conversation from the CLI. | The whole previous CLI conversation: the resumed process (same session `875e0e15`) recalled `HW4-CONTINUE-VERIFIED` with 0 tool calls. |
 
 An earlier attempt: at ~22:02 the user replied "Compact is done" from a button before `/compact` had actually been sent; Claude checked the transcript, found no compaction record, and asked the user to type it. The real compaction followed.
 

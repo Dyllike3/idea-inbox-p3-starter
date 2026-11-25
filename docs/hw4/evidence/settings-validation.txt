@@ -1,1 +1,9 @@
+# 2026-11-24 21:41 PST, original settings (commit 7a4bc3b), Node check against the schemastore permissionRule pattern:
 JSON parsed OK; allow=33 ask=18 deny=27 ; schema rule-pattern failures: 0
+
+# 2026-11-24 23:33 PST, after removing Write(./.env) and Write(./.env.*).
+# The user reported that the Claude Code 2.1.330 CLI flagged these two rules as invalid. Claude Code's changelog (~/.claude/cache/changelog.md) says:
+# "Added a startup warning for `Write(path)` ... permission rules — use `Edit(path)` or `Read(path)` instead".
+# The existing Edit(./.env) and Edit(./.env.*) deny rules keep the same protection. Node re-check:
+JSON parsed OK; allow=33 ask=18 deny=25; defaultMode=default; Write/NotebookEdit/Glob path rules: 0; malformed rules: 0
+env/secret deny rules: Read(./.env), Read(./.env.*), Read(./**/*.pem), Read(./**/*.key), Edit(./.env), Edit(./.env.*)

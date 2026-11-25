@@ -82,9 +82,7 @@
       "Read(./**/*.pem)",
       "Read(./**/*.key)",
       "Edit(./.env)",
-      "Edit(./.env.*)",
-      "Write(./.env)",
-      "Write(./.env.*)"
+      "Edit(./.env.*)"
     ]
   }
 }

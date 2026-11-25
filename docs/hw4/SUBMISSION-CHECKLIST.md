@@ -12,7 +12,7 @@ GitHub branch: https://github.com/Dyllike3/idea-inbox-p3-starter/tree/hw4/idea-e
 | Original `/init` output saved | ✅ | `evidence/CLAUDE.init-original.md`, commit `0efc0b9` |
 | CLAUDE.md revised (stack, architecture, conventions, tests, do's/don'ts) | ✅ | `CLAUDE.md`, commit `5fe6e72`; change table in `01-project-setup.md` §2 |
 | Valid `@imports` (`docs/PRD.md`, `docs/ARCHITECTURE.md`) | ✅ | `01-project-setup.md` §3 |
-| `.claude/settings.json` conservative permissions | ✅ | commit `7a4bc3b`; `evidence/settings-validation.txt` |
+| `.claude/settings.json` conservative permissions | ✅ | commit `7a4bc3b`; two invalid `Write(./.env*)` rules found by the CLI and removed in session 2; `evidence/settings-validation.txt` |
 | `/permissions` check | ⚠️ optional | Validated against the JSON schema instead; the `/permissions` dialog is not available in the Desktop Code tab. A screenshot from a terminal `claude` session would strengthen this. |
 
 ## Part 2 — Explore and Plan (15)
@@ -42,7 +42,7 @@ GitHub branch: https://github.com/Dyllike3/idea-inbox-p3-starter/tree/hw4/idea-e
 | --- | --- | --- |
 | `/compact` | ✅ | `evidence/compact-transcript-evidence.txt` |
 | `/clear` and resume from files | ✅ | `evidence/clear-transcript-evidence.txt`, `evidence/07-context-management.md` |
-| `claude --continue` | ⚠️ **pending** | see "Manual steps" below |
+| `claude --continue` | ✅ | `evidence/continue-transcript-evidence.txt`, `evidence/ui/continue-demo.webp`, `07-context-management.md` §3 |
 | `/export` | ⚠️ optional, not run | runbook lists it; metadata extracts used instead |
 | Annotated session log | ✅ | `docs/hw4/ANNOTATED-SESSION-LOG.md` |
 | 1–2 page reflection | ✅ | `docs/hw4/REFLECTION.md` (read and edit it so it is in your own voice) |
@@ -60,25 +60,9 @@ Saved in `evidence/06-final-verification.txt`.
 
 ## Manual steps (student)
 
-### 1. `claude --continue` demo
+### 1. `claude --continue` demo ✅
 
-Run this **after** this Desktop session is finished (so it is the most recent session in the folder). The `claude` command is not on PATH, so call the bundled binary. Use the parent folder, because that is where the Desktop sessions are stored:
-
-```powershell
-cd E:\idea-inbox-p3-starter
-```
-
-```powershell
-& "C:\Users\xiaow\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\claude-code\2.1.330\9424831ad51c\claude.exe" --continue
-```
-
-If it asks you to log in, log in. Then type:
-
-```text
-Without reading any files, what was the last HW4 step we completed and what is still pending?
-```
-
-Take a screenshot of the answer, save it as `docs/hw4/evidence/ui/continue-demo.png`, and type `/exit`. Then come back to the Code tab and say "--continue done" so the evidence can be recorded from the transcript and committed.
+Done by the user at 23:24–23:31 and recorded from the CLI transcript. Nothing left to do.
 
 ### 2. Teammate participation ⚠️
 
@@ -87,5 +71,6 @@ HW4 is a pair assignment. The repository has **no teammate commits, sessions or 
 ### 3. Before submitting
 
 - Read `REFLECTION.md` and adjust anything that does not match your own experience.
+- Make sure the grader can open the repository: unauthenticated requests to it returned 404, so it appears to be private. Make it public or add the grader as a collaborator.
 - Fill in the partner name at the top of `ANNOTATED-SESSION-LOG.md` once it is real.
 - Submit the branch URL above on Canvas yourself.
