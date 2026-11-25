@@ -2,7 +2,7 @@
 
 Living status file. Update it after every phase. A fresh or cleared Claude Code session should read this file first, then `CLAUDE.md`.
 
-_Last updated: 2026-11-24 ~22:10 PST, after AC2 + AC3 cycles and the UI check, right before the planned `/clear`._
+_Last updated: 2026-11-24 ~23:20 PST, in session 2 (after `/clear`), while writing Part 4 documents._
 
 ## Status
 
@@ -17,11 +17,11 @@ _Last updated: 2026-11-24 ~22:10 PST, after AC2 + AC3 cycles and the UI check, r
 | Part 3: AC3 RED / GREEN / REFACTOR | Done | `63d6d9a`, `e90434b`, `fc0ae3d` (+ `7bb4d74` copy); `evidence/04-ac3-category-filter.md` |
 | Manual UI check | Done | `evidence/05-ui-check.md`, `evidence/ui/*.jpg` |
 | Context mgmt: `/compact` | Done (user typed it) | see "Context management log"; `evidence/compact-transcript-evidence.txt` |
-| Context mgmt: `/clear` | **Next — user types it** | |
-| Context mgmt: `claude --continue` | Pending — user runs in a terminal | |
-| Context mgmt: `/export` | Pending — user types it (optional) | |
-| Part 4: annotated session log, reflection | Not started | |
-| README, submission checklist, final verification | Not started | |
+| Context mgmt: `/clear` | Done (user typed it, 23:12:48) | `evidence/07-context-management.md`, `evidence/clear-transcript-evidence.txt` |
+| Context mgmt: `claude --continue` | **Pending — user runs in a terminal** (steps in `SUBMISSION-CHECKLIST.md`) | |
+| Context mgmt: `/export` | Not run (optional) | |
+| Part 4: annotated session log, reflection | Done (session 2) | `ANNOTATED-SESSION-LOG.md`, `REFLECTION.md` |
+| README, submission checklist, final verification | Done (session 2) | `README.md`, `SUBMISSION-CHECKLIST.md`, `evidence/06-final-verification.txt` |
 | Push `hw4/idea-explorer-tdd` | Not started | needs user approval |
 | Teammate participation | **Missing** | assignment is for pairs; no teammate evidence exists |
 
@@ -74,21 +74,21 @@ c18b176 chore: bootstrap P3 starter
 | AC3 RED | 5 failed, 12 passed |
 | AC3 GREEN / REFACTOR | 17/17 |
 
-## Next steps (after `/clear`)
+## Next steps
 
-1. Write `docs/hw4/ANNOTATED-SESSION-LOG.md` from this file, `docs/hw4/evidence/*`, `git log`, and the transcript JSONL (fields only, no invented excerpts).
-2. Write `docs/hw4/REFLECTION.md` (500–650 words, first person, mark passages about the student's previous habits for their review), and a PDF only if it can be produced reliably without new project dependencies.
-3. Write `docs/hw4/SUBMISSION-CHECKLIST.md` (rubric audit: Part 1 12.5, Part 2 15, Part 3 15, Part 4 7.5; teammate section flagged as missing).
-4. Update `README.md` (feature, commands, HW4 docs links).
-5. Final verification: `npm.cmd test`, `run typecheck`, `run lint`, `run build`, `git log`; save to `docs/hw4/evidence/06-final-verification.txt`.
-6. Ask the user before `git push -u origin hw4/idea-explorer-tdd` (never force), then verify with `git ls-remote`.
+Done in session 2 (after `/clear`): session log, reflection, checklist, README, final verification (`evidence/06-final-verification.txt`), context-management evidence (`evidence/07-*`, `clear-transcript-evidence.txt`), push of `hw4/idea-explorer-tdd`.
+
+Remaining (student):
+1. `claude --continue` demo from a terminal (exact commands in `SUBMISSION-CHECKLIST.md`), then record it in session log §5 and `evidence/07-context-management.md` §3 and push again.
+2. Genuine teammate participation, or an explanation to the instructor.
+3. Review `REFLECTION.md`, then submit the branch URL on Canvas.
 
 ## Context management log
 
 | When (PST) | Command | Who ran it | Why | What was kept |
 | --- | --- | --- | --- | --- |
 | 2026-11-24 22:03–22:04 | `/compact` | user typed it (transcript: `<command-name>/compact</command-name>`, then `compact_boundary` at 06:04:32Z UTC, `trigger: manual`, `preTokens: 153831`, 71.4 s) | After the AC1 cycle the context held ~154k tokens, mostly long Vitest outputs, schema JSON and plan text that were already saved to files. A natural boundary before AC2. | Claude Code's summary (primary request and constraints, file states, errors and fixes, pending tasks, git log, next step) plus the most recent messages verbatim. Everything else was recoverable from the repo: this file, `CLAUDE.md`, the plan, and `evidence/`. After compaction Claude re-read this file, `02-ac1-*.md`, `App.tsx`, `filterIdeas.ts`, `setup.ts`, and continued AC2 RED without asking the user for context. |
-| (pending) | `/clear` | user | Boundary between implementation (Part 3) and writing (Part 4): the coding context is no longer needed. | Only files: this file, `CLAUDE.md` (auto-loaded) and `docs/hw4/evidence/`. |
+| 2026-11-24 23:12:48 | `/clear` | user typed it (new session `c7ea7f75` has `derived-from … via: clear` and `<command-name>/clear</command-name>`) | Boundary between implementation (Part 3) and writing (Part 4): the coding context is no longer needed. | Nothing from the conversation. Session 2 resumed from the auto-memory entry, git history, this file, the plan and `evidence/`. `CLAUDE.md` was not auto-loaded at first because the Code tab was opened on the parent folder (see `evidence/07-context-management.md`). |
 | (pending) | `claude --continue` | user, in a terminal | Show resuming the most recent conversation from the CLI. | The previous conversation in this folder. |
 
 An earlier attempt: at ~22:02 the user replied "Compact is done" from a button before `/compact` had actually been sent; Claude checked the transcript, found no compaction record, and asked the user to type it. The real compaction followed.

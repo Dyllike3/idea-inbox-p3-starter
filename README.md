@@ -1,36 +1,50 @@
-# Idea Inbox (P3 starter for HW4)
+# Idea Inbox — P3 / HW4 Idea Explorer
 
-A small React + TypeScript web application for browsing study, software, and personal ideas. The baseline displays four ideas. **Search, empty-result handling, and category filtering are deliberately not implemented** so you can build the **Idea Explorer** feature using authentic TDD in Claude Code.
+A small React + TypeScript app for browsing study, software and personal ideas. For HW4 the **Idea Explorer** feature was added with Claude Code using strict RED → GREEN → REFACTOR TDD.
+
+## Features
+
+- Four sample ideas shown as cards (title, category, notes) in a responsive grid.
+- **AC1 — Keyword search:** labeled search input; matches title or notes, case-insensitive, trims whitespace, updates as you type.
+- **AC2 — Result count and empty state:** count badge (`1 idea` / `N ideas`, announced via `role="status"`) and a `No matching ideas.` message.
+- **AC3 — Category filter:** accessible `All / Study / Software / Personal` dropdown, combined with the keyword (AND); `All` removes only the category restriction.
+
+Filtering logic is a pure function in `src/utils/filterIdeas.ts`; state lives in `App`.
 
 ## Requirements
 
-- Node.js 22.12+ or 20.19+ (Node.js 24 is also supported by Vite 7)
-- npm
-- Git
-- Claude Code access for HW4
+Node.js 20.19+ / 22.12+ / 24, npm, Git. On Windows PowerShell use `npm.cmd`.
 
-## Start locally
+## Commands
 
 ```sh
 npm install
-npm test
-npm run lint
+npm test             # Vitest, 17 tests
 npm run typecheck
+npm run lint
 npm run build
-npm run dev
+npm run dev          # http://localhost:5173
 ```
 
-Open the local URL printed by Vite (usually `http://localhost:5173`).
+## HW4 documents
 
-## Project docs
+| Deliverable | Location |
+| --- | --- |
+| Project instructions | [`CLAUDE.md`](CLAUDE.md) (original `/init` output: [`docs/hw4/evidence/CLAUDE.init-original.md`](docs/hw4/evidence/CLAUDE.init-original.md)) |
+| Permissions | [`.claude/settings.json`](.claude/settings.json) |
+| Approved Plan mode plan | [`docs/hw4/IMPLEMENTATION-PLAN.md`](docs/hw4/IMPLEMENTATION-PLAN.md) |
+| Annotated session log | [`docs/hw4/ANNOTATED-SESSION-LOG.md`](docs/hw4/ANNOTATED-SESSION-LOG.md) |
+| Reflection | [`docs/hw4/REFLECTION.md`](docs/hw4/REFLECTION.md) |
+| Evidence (test outputs, UI screenshots, context management) | [`docs/hw4/evidence/`](docs/hw4/evidence/) |
+| Workflow state / resume file | [`docs/hw4/WORKFLOW-STATE.md`](docs/hw4/WORKFLOW-STATE.md) |
+| Submission checklist | [`docs/hw4/SUBMISSION-CHECKLIST.md`](docs/hw4/SUBMISSION-CHECKLIST.md) |
 
-- `docs/PRD.md`: scope and three acceptance criteria for Idea Explorer.
-- `docs/ARCHITECTURE.md`: code layout and design decisions.
-- `docs/HW4-RUNBOOK.md`: exact sequence for the assignment.
-- `docs/SESSION-LOG-TEMPLATE.md`: blank outline for **real** Claude Code evidence.
+Product and architecture background: [`docs/PRD.md`](docs/PRD.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/HW4-RUNBOOK.md`](docs/HW4-RUNBOOK.md).
 
-## HW4 requirements still to do
+## TDD commits
 
-This ZIP is **not** a completed homework. In particular, it intentionally contains no `CLAUDE.md`, no `.claude/settings.json`, no search/filter implementation, no Git history, and no Claude Code transcripts. Use `/init` and iterate on the resulting file yourself/with your partner. Create real RED → GREEN → REFACTOR commits through Claude Code, export authentic session evidence, and write your reflection from what happened.
-
-If the course has a separate Project 3 specification, align the eventual P3 with that specification; this starter alone may not satisfy the entire P3 scope.
+| AC | RED | GREEN | REFACTOR |
+| --- | --- | --- | --- |
+| AC1 keyword search | `7b3c942` | `f3352b8` (after test-setup fix `1bf9f7c`) | `9b8e9fe` |
+| AC2 count + empty state | `4c3716d` | `05ac412` | `786fd7e` |
+| AC3 category filter | `63d6d9a` | `e90434b` | `fc0ae3d` |

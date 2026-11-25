@@ -1,0 +1,24 @@
+# /clear evidence extracted from Claude Code session transcripts
+# extracted: 2026-11-25T07:14:37Z by grep/sed (metadata fields only; no conversation text)
+# old session: b411dd84-2136-4693-bd2d-e7a60a7ebd97.jsonl (1112 lines)
+# new session: c7ea7f75-c2e5-4398-a76c-5fbdb5c70eb2.jsonl
+
+## new session: link back to the cleared session (line 4)
+{"type":"derived-from","v":1,"sessionId":"c7ea7f75-c2e5-4398-a76c-5fbdb5c70eb2","sessions":[{"type":"claude_code_session","id":"b411dd84-2136-4693-bd2d-e7a60a7ebd97","via":"clear"}]}
+
+## new session: user-typed /clear (line 6)
+"content":"<command-name>/clear</command-name>\n            <command-message>clear</command-message>\n            <command-args></command-args>"
+"timestamp":"2026-11-25T07:12:48.757Z"
+"entrypoint":"claude-desktop"
+"sessionId":"c7ea7f75-c2e5-4398-a76c-5fbdb5c70eb2"
+
+## new session: harness record of the local command (line 7)
+"timestamp":"2026-11-25T07:12:48.790Z"
+"commandRun":{"command":"clear","args":""}
+"version":"2.1.330"
+
+## old session: last user-visible activity before the clear
+"timestamp":"2026-11-25T06:09:04.589Z"
+"timestamp":"2026-11-25T06:09:04.624Z"
+"timestamp":"2026-11-25T07:12:48.740Z"
+"timestamp":"2026-11-25T07:12:48.742Z"
