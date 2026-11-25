@@ -1,14 +1,11 @@
 import { useState } from 'react'
 import { IdeaCard } from './components/IdeaCard'
 import { starterIdeas } from './data/ideas'
+import { filterIdeas } from './utils/filterIdeas'
 
 export default function App() {
   const [query, setQuery] = useState('')
-  const keyword = query.trim().toLowerCase()
-  const visibleIdeas = starterIdeas.filter(
-    (idea) =>
-      idea.title.toLowerCase().includes(keyword) || idea.notes.toLowerCase().includes(keyword),
-  )
+  const visibleIdeas = filterIdeas(starterIdeas, { query })
 
   return (
     <div className="page-shell">

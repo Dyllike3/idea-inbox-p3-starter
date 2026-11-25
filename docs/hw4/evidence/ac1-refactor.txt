@@ -1,0 +1,38 @@
+# run at 2026-11-24T21:46:21-08:00 on f3352b8 + uncommitted AC1 REFACTOR (extract filterIdeas)
+$ npm.cmd test -- --reporter=verbose
+
+> idea-inbox-p3@0.1.0 test
+> vitest run --reporter=verbose
+
+
+ RUN  v4.1.12 E:/idea-inbox-p3-starter/idea-inbox-p3-starter
+
+ ✓ src/App.test.tsx > Idea Inbox starter > shows the application heading and four starter ideas 90ms
+ ✓ src/App.test.tsx > AC1 — keyword search > renders a labeled search input that starts empty 7ms
+ ✓ src/App.test.tsx > AC1 — keyword search > keeps only ideas whose title matches as the user types 12ms
+ ✓ src/App.test.tsx > AC1 — keyword search > matches idea notes case-insensitively 16ms
+ ✓ src/App.test.tsx > AC1 — keyword search > returns every idea whose title or notes contain the keyword 9ms
+ ✓ src/App.test.tsx > AC1 — keyword search > ignores leading and trailing whitespace in the query 8ms
+ ✓ src/App.test.tsx > AC1 — keyword search > shows all ideas again when the query is cleared or only whitespace 19ms
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  21:46:21
+   Duration  784ms (transform 50ms, setup 122ms, import 34ms, tests 162ms, environment 346ms)
+
+# exit code: 0
+
+$ npm.cmd run typecheck
+
+> idea-inbox-p3@0.1.0 typecheck
+> tsc --noEmit
+
+# exit code: 0
+
+$ npm.cmd run lint
+
+> idea-inbox-p3@0.1.0 lint
+> eslint .
+
+# exit code: 0
+
