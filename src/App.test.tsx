@@ -123,3 +123,63 @@ describe('AC2 — result count and empty state', () => {
     expect(resultCount()).toHaveTextContent('4 ideas')
   })
 })
+
+describe('AC3 — category filter', () => {
+  function chooseCategory(category: string) {
+    fireEvent.change(screen.getByRole('combobox', { name: 'Category' }), {
+      target: { value: category },
+    })
+  }
+
+  it('renders an accessible category dropdown that defaults to All', () => {
+    render(<App />)
+
+    const select = screen.getByRole('combobox', { name: 'Category' })
+    expect(select).toHaveValue('All')
+    expect(
+      screen.getAllByRole('option').map((option) => option.textContent),
+    ).toEqual(['All', 'Study', 'Software', 'Personal'])
+  })
+
+  it('shows only ideas in the chosen category', () => {
+    render(<App />)
+
+    chooseCategory('Study')
+    expect(visibleTitles()).toEqual(['Retrieval practice quiz', 'Reading sprint routine'])
+    expect(screen.getByRole('status')).toHaveTextContent('2 ideas')
+
+    chooseCategory('Personal')
+    expect(visibleTitles()).toEqual(['Desk setup checklist'])
+    expect(screen.getByRole('status')).toHaveTextContent('1 idea')
+  })
+
+  it('combines the category with the keyword using AND', () => {
+    render(<App />)
+
+    search('plan')
+    chooseCategory('Study')
+
+    expect(visibleTitles()).toEqual(['Reading sprint routine'])
+  })
+
+  it('removes only the category restriction when All is selected again', () => {
+    render(<App />)
+
+    search('plan')
+    chooseCategory('Study')
+    chooseCategory('All')
+
+    expect(screen.getByRole('searchbox', { name: 'Search ideas' })).toHaveValue('plan')
+    expect(visibleTitles()).toEqual(['Desk setup checklist', 'Reading sprint routine'])
+  })
+
+  it('shows the empty state when category and keyword have no overlap', () => {
+    render(<App />)
+
+    search('quiz')
+    chooseCategory('Software')
+
+    expect(screen.getByText('No matching ideas.')).toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent('0 ideas')
+  })
+})
