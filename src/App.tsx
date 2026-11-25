@@ -20,8 +20,8 @@ export default function App() {
         <div className="eyebrow">P3 · STARTER PROJECT</div>
         <h1>Idea Inbox</h1>
         <p>
-          Keep small study and software ideas in one place. This starter intentionally
-          does not include search or filtering; those are the HW4 TDD feature.
+          Keep small study and software ideas in one place. Search by keyword and
+          narrow the list by category to find the idea you need.
         </p>
       </header>
 
